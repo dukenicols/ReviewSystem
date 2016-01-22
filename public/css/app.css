@@ -1,0 +1,72 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Open Sans', sans-serif; }
+
+h1 {
+  font-size: 33px; }
+
+h2 {
+  font-size: 33px; }
+
+h3 {
+  font-size: 26px; }
+
+h4 {
+  font-size: 15px; }
+
+p {
+  font-size: 14px; }
+
+.grey {
+  background-color: #f7f7f7;
+  margin: 20px 0; }
+
+#sidebar .nueva-resena {
+  padding: 20px 10px;
+  margin: 0px;
+  text-align: center; }
+
+#sidebar .populares {
+  padding-top: 20px; }
+
+input.error {
+  border: 1px solid red; }
+
+.navbar {
+  margin-bottom: 0px;
+  height: 100px;
+  background: #FFFFFF; }
+
+.under-nav {
+  background: #2a9da0;
+  height: 80px; }
+
+/** REVIEWS **/
+.resena {
+  border-bottom: 1px solid #eea441;
+  height: auto;
+  position: relative;
+  padding-bottom: 20px; }
+  .resena .title, .resena .website {
+    color: #df444b;
+    margin: 0;
+    font-weight: 200; }
+  .resena .title {
+    margin-top: 20px; }
+  .resena .website, .resena .puntuacion {
+    display: inline; }
+  .resena p {
+    color: #5f5e5e; }
+  .resena .circles {
+    text-align: center; }
+    .resena .circles div {
+      display: inline-block;
+      border: 1px solid #2a9da0;
+      height: 50px;
+      width: 50px;
+      content: ' ';
+      border-radius: 100px;
+      margin: 0 auto;
+      text-align: center; }
+
+/*# sourceMappingURL=app.css.map */

@@ -1,0 +1,65 @@
+// @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+
+@import 'variables';
+@import 'globals';
+@import 'sidebar';
+
+input {
+	&.error {
+		border: 1px solid red;
+	}
+}
+
+.navbar {
+	margin-bottom: 0px;
+	height: 100px;
+	background: #FFFFFF;
+}
+
+.under-nav {
+	background: #2a9da0;
+	height: 80px;
+}
+
+/** REVIEWS **/
+.resena {
+	border-bottom: 1px solid $orange;
+	height: auto;
+	position: relative;
+	padding-bottom: 20px;
+
+	.title, .website {
+		color: $red;
+		margin: 0;
+		font-weight: 200;
+	}
+
+	.title {
+		margin-top: 20px;
+	}
+
+	.website, .puntuacion {
+		display: inline;
+	}
+
+	p {
+		color: $text;
+	}
+
+	.circles {
+		text-align: center;
+
+		div {
+			display: inline-block;
+			border: 1px solid $turquoise;
+			height: 50px;
+			width: 50px;
+			content: ' ';
+			border-radius: 100px;
+			margin: 0 auto;
+			text-align: center;
+		}
+
+	}
+}
