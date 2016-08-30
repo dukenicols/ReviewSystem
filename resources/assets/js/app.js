@@ -1,56 +1,71 @@
-window.$ = window.jQuery = require('jquery')
-require('bootstrap-sass');
+require('angular');
+require('lodash');
+require('satellizer');
+require('angular-route');
+require('./controllers/mainCtrl');
+require('./controllers/reviewCtrl');
+require('./services/commentService');
+require('./services/reviewService');
+require('./services/redirectService');
+require('./controllers/authCtrl');
+require('./controllers/logoutCtrl');
+require('./services/userService');
+require('./vendor/ngraty');
+require('angular-ui-router');
+require('angular-messages');
+require('./controllers/addReviewCtrl');
+require('./directives/pwCheck');
 
-$( document ).ready(function() {
-		var $username = $('#username'),
-				$pass		 = $('#password'),
-				$token		 = $('#token');
+var uibs = require('angular-ui-bootstrap');
 
-		$username.on('change', function() { $(this).removeClass('error'); });
-		$pass.on('change', function() { $(this).removeClass('error'); });
+var reviewApp = angular.module('reviewApp', ['ngRaty', 'redirectService','ngMessages', 'reviewApp.directives', uibs, 'authCtrl', 'logoutCtrl', 'ui.router', 'satellizer', 'mainCtrl', 'reviewCtrl', 'reviewService', 'commentService', 'userService', 'addReviewCtrl'], function($interpolateProvider) {
+  $interpolateProvider.startSymbol('[[');
+  $interpolateProvider.endSymbol(']]');
+})
 
+.config(function($stateProvider, $urlRouterProvider, $authProvider, $locationProvider, $provide) {
 
-    $('#add-resena').on('click', function() {
-    	var $this = $(this);
-    	
-    	if ( $this.hasClass('not-logged') ) {
-    		
-				$('#login-modal').modal();
+  $authProvider.loginUrl = '/api/authenticate';
+  $urlRouterProvider.otherwise('/login');
 
-				$('#login-modal-submit').on('click', function (evt) {
-					evt.preventDefault();
+  $stateProvider
+    .state('login', {
+      url: '/login',
+      templateUrl: '/js/tpl/login.html',
+      controller: 'AuthController',
+      // resolve: {
+      //   authenticate: authenticate
+      // },
+    })
+    .state('register', {
+      url: '/register',
+      templateUrl: '/js/tpl/register.html',
+      controller: 'AuthController'
+    })
+    .state('logout', {
+      url: '/logout',
+      controller: 'LogoutController',
+      // resolve: {
+      //   redirectIfNotAuthenticated: _redirectIfNotAuthenticated
+      // },
+    });
 
-					//$(this).addClass('disabled');
+    function redirectWhenLoggedOut($q, $injector) {
+      return {
+        responseError: function (rejection) {
+            var $state = $injector.get('$state');
+            var rejectionReasons = ['token_not_provided', 'token_expired', 'token_absent', 'token_invalid'];
 
-					$('#ajax_loading').show();
+            angular.forEach(rejectionReasons, function (value, key) {
+                if (rejection.data.error === value) {
+                    localStorage.removeItem('user');
+                    $location.path('/login');
+                }
+            });
 
-					
-
-					var error = 0;
-
-					if ($username.val().length === 0 ) {
-							$username.addClass('error');
-							error++;
-					}
-					if ($pass.val().length === 0 ) {
-							$pass.addClass('error');
-							error++;
-					}
-
-					if (error > 0) {
-						return;
-					}
-
-					$.ajax({ 
-					    type: "POST",
-					    url: "/login",  // Send the login info to this page
-					    data: 'email=' + $username.val() + '&password=' + $pass.val() + '&_token=' + $token.val(), 
-					    success: function(msg){
-					    	console.log(msg);
-					    }
-					  });
-				});
-			}
-		});
+            return $q.reject(rejection);
+        }
+      };
+    }
+    $provide.factory('redirectWhenLoggedOut', redirectWhenLoggedOut);
 });
-			

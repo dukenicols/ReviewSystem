@@ -1,0 +1,90 @@
+<div class="page-content" ng-controller="AuthController">
+  <div class="page-brand-info">
+    <div class="brand">
+      <img class="brand-img" src="/images/logo@2x.png" alt="...">
+      <h2 class="brand-text font-size-40">Reviews</h2>
+    </div>
+    <p class="font-size-20">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua.</p>
+  </div>
+  <div class="page-login-main">
+    <div class="brand visible-xs">
+      <img class="brand-img" src="/images/logo-blue@2x.png" alt="...">
+      <h3 class="brand-text font-size-40">Reviews</h3>
+    </div>
+    <h3 class="font-size-24">Registro</h3>
+    <form name="registerForm" ng-submit="registerForm.$valid && register()" role="form">
+      <div class="form-group">
+        <label class="sr-only" for="inputName">Nombre</label>
+        <input type="text" class="form-control" name="userFirstName" ng-model="newUser.first_name" placeholder="Nombre" required />
+        <div ng-messages="registerForm.userFirstName.$error">
+          <div ng-message="required" class="error">Nos gustar&iacute;a saber tu nombre.</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="sr-only" for="inputName">Apellido</label>
+        <input type="text" class="form-control" name="userLastName" ng-model="newUser.last_name" placeholder="Apellido" required />
+        <div ng-messages="registerForm.userLastName.$error">
+          <div ng-message="required" class="error">Nos gustar&iacute;a saber tu apellido.</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="sr-only" for="inputEmail">Usuario</label>
+        <input type="text" class="form-control" name="username" ng-model="newUser.username" placeholder="Usuario" required />
+        <div ng-messages="registerForm.username.$error">
+          <div ng-message="required" class="error">Como podemos llamarte?.</div>
+          <div ng-bind="registerErrorBag.username" ng-if="registerErrorBag.username" class="error"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="sr-only" for="inputEmail">Email</label>
+        <input type="email" class="form-control" name="email" ng-model="newUser.email" placeholder="Email" required />
+        <div ng-messages="registerForm.email.$error">
+          <div ng-message="required" class="error">Es un campo requerido.</div>
+          <div ng-message="email" class="error">Parece que no has introducido un email valido.</div>
+          <div ng-bind="registerErrorBag.email" ng-if="registerErrorBag.email" class="error"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="sr-only" for="inputPassword">Contrase&ntilde;a</label>
+        <input type="password" class="form-control" name="password" ng-model="newUser.password" ng-minlength="6" placeholder="Contrase&ntilde;a" required />
+        <div ng-messages="registerForm.password.$error">
+          <div ng-message="minlength" class="error">La contrase&ntilde;a debe contener al menos 6 caracteres.</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="sr-only" for="inputPasswordCheck">Confirma tu contrase&ntilde;a</label>
+        <input type="password" class="form-control" name="password_confirmation" ng-model="newUser.password_confirmation"
+          pw-check="newUser.password" placeholder="Confirma tu contrase&ntilde;a" required  />
+        <div class="msg-block" ng-show="registerForm.$error">
+          <span class="error" ng-show="registerForm.password_confirmation.$error.pwmatch">No coinciden.</span>
+        </div>
+      </div>
+      <div class="form-group clearfix">
+        <div class="checkbox-custom checkbox-inline checkbox-primary pull-left">
+          <input type="checkbox" id="inputCheckbox" required ng-model="newUser.terms" name="term">
+          <label for="inputCheckbox"></label>
+        </div>
+        <p class="margin-left-40">Al hacer click en registrame, aceptas nuestros <a class="no-margin" href="#">Terminos y Condiciones</a>.</p>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">Registrame</button>
+    </form>
+    <p>Ya tienes una cuenta? <a ui-sref="login">Inicia Sesi&oacute;n</a></p>
+    <footer class="page-copyright">
+      <p>Sitio por Dodable</p>
+      <p>&copy; [[ date | date: 'yyyy' ]]. Todos los derechos reservados.</p>
+      <div class="social">
+        <a class="btn btn-icon btn-round social-twitter" href="javascript:void(0)">
+          <i class="icon bd-twitter" aria-hidden="true"></i>
+        </a>
+        <a class="btn btn-icon btn-round social-facebook" href="javascript:void(0)">
+          <i class="icon bd-facebook" aria-hidden="true"></i>
+        </a>
+        <a class="btn btn-icon btn-round social-google-plus" href="javascript:void(0)">
+          <i class="icon bd-google-plus" aria-hidden="true"></i>
+        </a>
+      </div>
+    </footer>
+  </div>
+</div>
+<!-- End Page -->
